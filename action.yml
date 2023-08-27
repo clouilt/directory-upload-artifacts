@@ -1,0 +1,19 @@
+name: 'upload every file in a directory as artifact'
+desciption: ''
+inputs:
+    dir:
+        description: 'directory'
+        required: true
+runs:
+    using: 'composite'
+    steps:
+        - name: Organize files
+          id: organize2
+          run: |
+            echo "filels=`find ${{ inputs.dir }} -type f -printf \"%h/%f \" `" >> $GITHUB_ENV
+            echo "::set-output name=status::success"
+
+        - uses: clouilt/filelist-upload-artifacts@0.1
+          id: aa2
+          with:
+            filels: ${{ env.filels }}
