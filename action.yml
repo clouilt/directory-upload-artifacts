@@ -8,6 +8,7 @@ runs:
     using: 'composite'
     steps:
         - name: Organize files
+          shell: bash
           id: organize2
           run: |
             echo "filels=`find ${{ inputs.dir }} -type f -printf \"%h/%f \" `" >> $GITHUB_ENV
